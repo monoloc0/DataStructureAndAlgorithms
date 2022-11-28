@@ -1,0 +1,42 @@
+def merge_sort(my_list):
+
+    if len(my_list) == 1:
+        return my_list
+    
+    mid_index = int(len(my_list)/2)
+
+    left = merge_sort(my_list[:mid_index])
+    right = merge_sort(my_list[mid_index:])
+
+    return merge(left, right)
+
+
+def merge(list_1, list_2):
+
+    """
+    merge() takes two sorted lists as arguments and merges them together to merged_list
+    """
+
+    i, j = 0, 0
+    merged_list = []
+
+    while i < len(list_1) and j < len(list_2):
+           
+        if list_1[i] < list_2[j]:
+            merged_list.append(list_1[i])
+            i += 1
+        else:
+            merged_list.append(list_2[j])
+            j += 1
+
+    if i == len(list_1):
+        merged_list += list_2[j:len(list_2)]
+
+    if j == len(list_2):
+        merged_list += list_1[i:len(list_1)]
+        
+    return merged_list
+
+
+
+print(merge_sort([3,1,4,2,0,11,3,5]))
